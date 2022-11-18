@@ -54,6 +54,7 @@
     <script src="~/js/tareas.js" asp-append-version="true"></script>
     <script src="~/js/utilidades.js" asp-append-version="true"></script>
     <script src="~/js/pasos.js" asp-append-version="true"></script>
+    <script src="~/js/archivos-adjuntos.js" asp-append-version="true"></script>
 
     <script>
         const urlTarea = "/api/tareas";
@@ -101,7 +102,8 @@
             id: 0,
             titulo: ko.observable(''),
             descripcion: ko.observable(''),
-            pasos: ko.observableArray([])
+            pasos: ko.observableArray([]),
+            archivosAdjuntos: ko.observableArray([])
         };
 
         const tareaListadoViewModel = new tareaListado();
