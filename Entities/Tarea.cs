@@ -13,7 +13,7 @@ namespace ManejoTareas.Entities {
         public string UsuarioId { get; set; }
         public DateTime FechaCreacion { get; set; }
         public List<Paso> Pasos { get; set; }
-        public List<ArchivoAdjunto> ArchivoAdjuntos { get; set; }
+        public List<ArchivoAdjunto> ArchivosAdjuntos { get; set; }
         public IdentityUser Usuario { get; set; }
     }
 }

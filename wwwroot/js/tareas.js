@@ -122,6 +122,8 @@ async function manejarTarea(tarea) {
         }))
     });
 
+    prepararArchivosAdjuntos(json.archivosAdjuntos);
+
     modalEditarTarea.show();
 }
 

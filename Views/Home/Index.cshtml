@@ -59,6 +59,7 @@
     <script>
         const urlTarea = "/api/tareas";
         const urlPasos = "/api/pasos";
+        const urlArchivos = "/api/archivos";
 
         const editarTareaC = document.getElementById('modal-editar-tarea');
         const modalEditarTarea = new bootstrap.Modal(editarTareaC);
@@ -120,6 +121,17 @@
             self.esNuevo = ko.pureComputed(function () {
                 return self.id() == 0;
             })
+        }
+
+        function archivoAdjuntoViewModel({ id, titulo, publicado, modoEdicion, orden, url }) {
+            var self = this;
+
+            self.id = id;
+            self.titulo = ko.observable(titulo || '');
+            self.publicado = publicado;
+            self.modoEdicion = ko.observable(modoEdicion);
+            self.orden = orden;
+            self.url = url;
         }
 
         obtenerTareas();

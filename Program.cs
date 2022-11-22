@@ -53,6 +53,7 @@ builder.Services.AddLocalization(opc => {
 
 builder.Services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddTransient<IAlmacenadorArchivosRepository, AlmacenadorArchivosRepository>();
 
 var app = builder.Build();
 
