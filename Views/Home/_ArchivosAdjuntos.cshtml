@@ -4,7 +4,7 @@
     Archivos Adjuntos
 </label>
 
-<button onclick="manejarAgregarArchivo()">
+<button class="btn btn-primary btn-sm" onclick="manejarAgregarArchivo()">
     <i class="bi bi-plus"></i>
 </button>
 
@@ -29,7 +29,7 @@
         </div> 
         <div>
             Agregado <span data-bind="text: publicado"></span> -
-            <span class="fw-bold" style="cursor: pointer">Borrar</span> -
+            <span class="fw-bold" style="cursor: pointer" data-bind="click: manejarBorrarArchivoAdj">Borrar</span> -
             <span class="fw-bold" style="cursor: pointer">Descargar</span>
         </div>
     </div>

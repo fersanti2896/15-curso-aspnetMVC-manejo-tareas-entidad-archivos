@@ -77,5 +77,27 @@ namespace ManejoTareas.Controllers {
 
             return Ok();
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id) {
+            var usuarioID = usuarioRepository.ObtenerUsuarioId();
+            var archivoAdj = await context.ArchivosAdjuntos
+                                          .Include(a => a.Tarea)
+                                          .FirstOrDefaultAsync(a => a.Id == id);
+
+            if (archivoAdj is null) {
+                return NotFound();
+            }
+
+            if (archivoAdj.Tarea.UsuarioId != usuarioID){
+                return Forbid();
+            }
+
+            context.Remove(archivoAdj);
+            await context.SaveChangesAsync();
+            await almacenadorArchivos.Borrar(archivoAdj.Url, contenedor);
+
+            return Ok();
+        }
     }
 }
