@@ -113,3 +113,7 @@ async function borrarArchivoAdjunto(archivoAdjunto) {
 
     editarTareaViewModel.archivosAdjuntos.remove(function (item) { return item.id == archivoAdjunto.id });
 }
+
+function manejarDescargarArchivoAdj(archivoAdj) {
+    descargarArchivo(archivoAdj.url, archivoAdj.titulo());
+}
