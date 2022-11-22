@@ -47,3 +47,40 @@ function prepararArchivosAdjuntos(archivosAdjuntos) {
             new archivoAdjuntoViewModel({ ...archivoAdjunto, modoEdicion: false }));
     });
 }
+
+let tituloArchivoAdjAnterior;
+
+function manejarTituloArchivoAdj(archivoAdjunto) {
+    archivoAdjunto.modoEdicion(true);
+    tituloArchivoAdjAnterior = archivoAdjunto.titulo();
+
+    $("[name='txtArchivoAdjuntoTitulo']:visible").focus();
+}
+
+
+async function manejarFocosoutTituloArchivoAdj(archivoAdjunto) {
+    archivoAdjunto.modoEdicion(false);
+
+    const idTarea = archivoAdjunto.id;
+
+    if (!archivoAdjunto.titulo()) {
+        archivoAdjunto.titulo(tituloArchivoAdjAnterior);
+    }
+
+    if (archivoAdjunto.titulo() === tituloArchivoAdjAnterior) {
+        return;
+    }
+
+    const data = JSON.stringify(archivoAdjunto.titulo());
+    const resp = await fetch(`${urlArchivos}/${idTarea}`, {
+        method: 'PUT',
+        body: data,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    if (!resp.ok) {
+        manejarErrorAPI(resp);
+    }
+}

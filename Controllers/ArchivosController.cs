@@ -56,5 +56,26 @@ namespace ManejoTareas.Controllers {
 
             return archivosAdj.ToList();
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(Guid id, [FromBody] string titulo) {
+            var usuarioID = usuarioRepository.ObtenerUsuarioId();
+            var archivoAdj = await context.ArchivosAdjuntos
+                                          .Include(a => a.Tarea)
+                                          .FirstOrDefaultAsync(a => a.Id == id);
+
+            if (archivoAdj is null) {
+                return NotFound();
+            }
+
+            if (archivoAdj.Tarea.UsuarioId != usuarioID) {
+                return Forbid();
+            }
+
+            archivoAdj.Titulo = titulo;
+            await context.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }
